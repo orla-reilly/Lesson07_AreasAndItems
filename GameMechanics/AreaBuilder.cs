@@ -1,0 +1,55 @@
+namespace TheWorld.GameMechanics;
+using static TheWorld.Helpers;
+public record AreaBuilder
+{ private Area _area = null!;
+
+    private AreaBuilder() { }
+
+    /// <summary>
+    /// Start with a FROM method.  An area starts from the name of its archetype.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static AreaBuilder FromName(string name) => new() { _area = new Area(ValidateString(name)) };
+    
+    /// <summary>
+    /// Adds a description to the area being built.  This is optional, but recommended.
+    /// </summary>
+    /// <param name="description"></param>
+    /// <returns></returns>
+    public AreaBuilder WithDescription(string description) => 
+        this with 
+        {
+            _area = _area with { Description = ValidateString(description) }
+        };
+
+    /// <summary>
+    /// TODO: We need to revisit CreatureBuilder so that they are added into the GameData!
+    /// </summary>
+    /// <param name="creature"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public AreaBuilder WithCreature(string creature) =>
+        throw new NotImplementedException("WithCreature is not implemented yet.");
+
+    public AreaBuilder WithItem(string item) =>
+        this with
+        {
+            _area = _area with { Items = [.. _area.Items, item] }
+        };
+    /// <summary>
+    /// Builds the area and adds it to the game data.
+    /// </summary>
+    /// <param name="gameData"></param>
+    /// <returns>The new area's name, or null if it couldn't be added.</returns>
+    public string? Build(GameData gameData)
+    {
+        if (gameData.TryAddArea(_area))
+            return _area.Name;
+
+        return null;
+    }
+    
+}
+
+    

@@ -1,5 +1,7 @@
 namespace TheWorld.GameMechanics;
 
+using static TheWorld.Helpers;
+
 /// <summary>
 /// Builds a <see cref="Creature"/> one part at a time.
 ///
@@ -24,7 +26,7 @@ public record CreatureBuilder
     /// <summary>
     /// Start with a FROM method.  A creature starts from the name of its archetype.
     /// </summary>
-    public static CreatureBuilder FromName(string name) => new() { _name = ValidateName(name) };
+    public static CreatureBuilder FromName(string name) => new() { _name = ValidateString(name) };
 
     public CreatureBuilder WithHealthPoints(HealthPoints hp) => this with { _healthPoints = hp };
     public CreatureBuilder WithAbilities(AbilityScore abilities) => this with { _abilities = abilities };
@@ -36,11 +38,5 @@ public record CreatureBuilder
     public Creature Build() =>
         Creature.Create(_name, _healthPoints, _abilities, _experienceReward);
 
-    /// <returns>The trimmed name, or "Blob" when there's nothing there but White-Space.</returns>
-    private static string ValidateName(string name) =>
-        name switch
-        {
-            var n when string.IsNullOrWhiteSpace(n) => "Blob",
-            _ => name.Trim()
-        };
+   
 }

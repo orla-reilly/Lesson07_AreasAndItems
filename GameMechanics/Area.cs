@@ -52,22 +52,22 @@ public record Area
         var sb = new StringBuilder();
         sb.AppendLine($"You are in {Name}.");
         sb.AppendLine(Description);
-        if (Creatures.Any())
+        if (Creatures.Any()) //if any creatures around
         {
             sb.AppendLine("You see the following creatures:");
             foreach (var creature in Creatures)
             {
-                sb.AppendLine($"- {creature}");
-            }
+                sb.AppendLine($"- {creature}"); // add = append
+            } // name the creatures existing in surroundings
         }
-        if (Items.Any())
+        if (Items.Any()) // if items
         {
             sb.AppendLine("You see the following items:");
             foreach (var item in Items)
             {
                 sb.AppendLine($"- {item}");
-            }
+            }//name items
         }
-        return sb.ToString();
+        return sb.ToString(); // equivalent to Builder.Build
     }
 }
