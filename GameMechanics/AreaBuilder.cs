@@ -1,7 +1,8 @@
 namespace TheWorld.GameMechanics;
 using static TheWorld.Helpers;
 public record AreaBuilder
-{ private Area _area = null!;
+{
+    private Area? _area;
 
     private AreaBuilder() { }
 
@@ -38,6 +39,8 @@ public record AreaBuilder
         {
             _area = _area with { Items = [.. _area.Items, item] }
         };
+    
+    public AreaBuilder WithID(string id) => this with { _area = _area with { ID = id } }; 
     /// <summary>
     /// Builds the area and adds it to the game data.
     /// </summary>

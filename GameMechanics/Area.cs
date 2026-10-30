@@ -16,6 +16,8 @@ public record Area
     /// This is the interesting description of the area, which is shown to the player when they enter it.
     /// </summary>
     public string Description { get; init; } = string.Empty;
+    
+    public string ID { get; init; } = string.Empty;
 
     /// <summary>
     /// Creatures that live in this area are listed here, by name.
@@ -41,7 +43,11 @@ public record Area
     /// The internal Create is for CreatureBuilder, and it trusts the builder
     /// </summary>
     /// <param name="name"></param>
-    internal Area(string name) { Name = name; }
+    internal Area(string name) 
+    { 
+        Name = name;
+        ID = name;
+    } 
 
     /// <summary>
     /// Returns a description of the area and its contents.

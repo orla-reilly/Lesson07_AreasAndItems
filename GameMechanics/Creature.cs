@@ -12,6 +12,8 @@ namespace TheWorld.GameMechanics;
 public record Creature
 {
     public string Name { get; }
+    
+    public string ID { get; init; } = string.Empty;
 
     public HealthPoints HealthPoints { get; }
 
@@ -29,6 +31,7 @@ public record Creature
         HealthPoints = healthPoints;
         Abilities = abilities;
         ExperienceReward = experienceReward;
+        ID = name;
     }
 
     internal static Creature Create(string name, HealthPoints healthPoints,

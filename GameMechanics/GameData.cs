@@ -30,7 +30,7 @@ public record GameData
     //--------------------------------------------------------------
 
     public bool TryAddArea(Area area) => Areas.TryAdd(area.Name, area);
-    public bool TryAddItem(Item item) => Items.TryAdd(item.Name, item);
+    public bool TryAddItem(Item item) => Items.TryAdd(item.ID, item);
     public bool TryAddCreature(Creature creature) => Creatures.TryAdd(creature.Name, creature);
 
     //--------------------------------------------------------------
@@ -38,6 +38,6 @@ public record GameData
     // TODO:  This is a very simple implementation.  It does not handle errors.  It is just a starting point.
     //--------------------------------------------------------------
     public Area? GetArea(string name) => Areas.GetValueOrDefault(name);
-    public Item? GetItem(string name) => Items.GetValueOrDefault(name);
+    public Item? GetItem(string id) => Items.GetValueOrDefault(id);
     public Creature? GetCreature(string name) => Creatures.GetValueOrDefault(name);
 }

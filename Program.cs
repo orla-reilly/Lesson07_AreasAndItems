@@ -30,29 +30,36 @@ var goblin = StockCreatures.Goblin;
 
 // Somewhere for them to be.  Each thing goes into the GameData once, under its name.
 // TODO:  This is the long way around.  Builders can do this for us.
-var reference =
+var tree =
     ItemBuilder.FromName("Tree")
         .WithDescription("A big tree. It has a lot of leaves.")
+        .WithID("Tree 1")
         .Build(gameData); // build returns name 
-Console.WriteLine(reference); // return name of item
+Console.WriteLine(gameData.GetItem(tree!)?.Examine() ?? "nothing to loook at"); // return name of item
+
+var tree2 =
+    ItemBuilder.FromName("Tree")
+        .WithDescription("A big tree. It has a lot of leaves.")
+        .WithID("Tree 2")
+        .Build(gameData); // build returns name 
 
 
 //gameData.TryAddItem(new Item("Tree", "A big tree.  It has a lot of leaves."));
 //try add is alowed to fail, will not crash, 
 //^^^
 
-Console.WriteLine(gameData.GetItem(reference)?.Examine() ?? "nothing to look at");
 
 var forest = AreaBuilder
     .FromName("Forest")
     .WithDescription("A dark forest.  It has a lot of trees.")
-    .WithItem(reference!) // TODO: That ! is a hack.  We need to do something better someday...
+    .WithItem(tree!) 
+    .WithItem(tree2)
     .Build(gameData);
 
 
     Console.WriteLine(gameData.GetArea(forest!)?.LookAround() ?? "nothing to look at");
 
-    
+
 
     
 player.ShowSheet();

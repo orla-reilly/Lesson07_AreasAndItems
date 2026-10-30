@@ -5,8 +5,8 @@ using static TheWorld.Helpers;
 
 public record ItemBuilder
 {
-    private string _name;
-    private string _description;
+    private Item? _item;
+    
     /// <summary>
     /// Start an Item from a name
     /// </summary>
@@ -14,20 +14,24 @@ public record ItemBuilder
     /// <returns></returns>
     
     public static ItemBuilder FromName(string name) => 
-        new ItemBuilder() { _name = ValidateString(name) };
+        new ItemBuilder() { _item =new( ValidateString(name), string.Empty) };
     /// <summary>
     /// Set the description of the item. 
     /// </summary>
     /// <param name="description"></param>
     /// <returns></returns>
     public ItemBuilder WithDescription(string description) =>
-        this with { _description = ValidateString(description) };
+        this with { _item = _item with { Description = ValidateString(description) } };
+
+    public ItemBuilder WithID(string id) => this with { _item = _item with { ID = id } };
 //seomtheing different, inject gamedata
-    public string Build(GameData gameData)
+    public string? Build(GameData gameData)
     {
-        var item = new Item(_name, _description);
-        if (gameData.TryAddItem(item))
-            return _name;
+        
+        if (gameData.TryAddItem(_item))
+        {
+            return _item.Name;
+        }
         return null;
     }
 }

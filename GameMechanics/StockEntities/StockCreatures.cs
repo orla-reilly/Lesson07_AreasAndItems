@@ -7,12 +7,12 @@ namespace TheWorld.GameMechanics.StockEntities;
 /// </summary>
 public static class StockCreatures
 {
-    public static Creature Kobold =>
+    public static string? Kobold(GameData gameData) =>
         CreatureBuilder.FromName("Kobold")
             .WithHealthPoints(HealthPoints.Create(5, Dice.D6 with { Count = 2, Modifier = -2 }))
             .WithAbilities(AbilityScore.Create(7, 15, 9, 8, 7, 8)!)
             .WithExperienceReward(25)
-            .Build();
+            .Build(gameData);
 
     public static Creature Goblin =>
         CreatureBuilder.FromName("Goblin")
