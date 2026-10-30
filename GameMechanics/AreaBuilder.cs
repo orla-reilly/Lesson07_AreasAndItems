@@ -10,7 +10,8 @@ public record AreaBuilder
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static AreaBuilder FromName(string name) => new() { _area = new Area(ValidateString(name)) };
+    public static AreaBuilder FromName(string name) => 
+        new() { _area = new Area(ValidateString(name)) };
     
     /// <summary>
     /// Adds a description to the area being built.  This is optional, but recommended.
@@ -50,6 +51,19 @@ public record AreaBuilder
         return null;
     }
     
+    // <summary>
+    // Start with a FROM method.  An area starts from an existing area, which is copied and modified.
+    // </summary>
+    //public static AreaBuilder FromArea(Area area) => new() { _area = area };
+
+
+    // <summary>
+    // TODO: Start with a FROM method.  An area starts from a JSON string, which is parsed and modified.
+    // </summary>
+    //public static AreaBuilder FromJson(string json) => 
+        //throw new NotImplementedException("FromJson is not implemented yet.  It will be implemented in a future lesson.");
+
+        
 }
 
     

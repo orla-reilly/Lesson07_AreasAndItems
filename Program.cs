@@ -36,11 +36,6 @@ var reference =
         .Build(gameData); // build returns name 
 Console.WriteLine(reference); // return name of item
 
-var tree2 = ItemBuilder
-    .FromName("Tree")
-    .WithDescription("Another big tree.")
-    .Build(gameData);
-
 
 //gameData.TryAddItem(new Item("Tree", "A big tree.  It has a lot of leaves."));
 //try add is alowed to fail, will not crash, 
@@ -52,13 +47,14 @@ var forest = AreaBuilder
     .FromName("Forest")
     .WithDescription("A dark forest.  It has a lot of trees.")
     .WithItem(reference!) // TODO: That ! is a hack.  We need to do something better someday...
-    .WithItem(tree2!)
     .Build(gameData);
+
 
     Console.WriteLine(gameData.GetArea(forest!)?.LookAround() ?? "nothing to look at");
 
+    
 
-
+    
 player.ShowSheet();
 
 bree.ShowSheet();
